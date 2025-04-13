@@ -1,13 +1,14 @@
 .sidebar {
-  width: 220px;
-  background: #ffffff;
+  width: 100px;
+  background: #fff;
   border-right: 1px solid #eaeaea;
   height: 100vh;
-  padding: 2rem 1rem;
+  padding: 1rem 0.2rem;
   position: fixed;
   top: 0;
   left: 0;
-  font-family: 'Segoe UI', sans-serif;
+  transition: transform 0.3s ease-in-out;
+  z-index: 1000;
 }
 
 .sidebar-logo {
@@ -19,7 +20,7 @@
 .logo-icon {
   width: 36px;
   height: 36px;
-  background-color: #3f51b5; /* deep indigo */
+  background-color: #3f51b5;
   color: white;
   font-weight: bold;
   font-size: 1rem;
@@ -28,7 +29,6 @@
   justify-content: center;
   align-items: center;
   margin-right: 0.75rem;
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
 }
 
 .logo-text {
@@ -40,7 +40,6 @@
 nav ul {
   list-style: none;
   padding: 0;
-  margin: 0;
 }
 
 .nav-link {
@@ -59,4 +58,16 @@ nav ul {
   color: #111;
   background: #eaefff;
   font-weight: 600;
+}
+
+/* ✅ RESPONSIVE FIX */
+@media (max-width: 768px) {
+  .sidebar {
+    transform: translateX(-100%);
+    position: absolute;
+  }
+
+  .sidebar.active {
+    transform: translateX(0);
+  }
 }

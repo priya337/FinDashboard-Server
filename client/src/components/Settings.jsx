@@ -16,21 +16,52 @@ const Settings = () => {
     country: 'USA',
   });
 
-  const [profilePic, setProfilePic] = useState('https://i.pravatar.cc/100'); // Profile picture in settings
+  const [errors, setErrors] = useState({});
+  const [profilePic, setProfilePic] = useState('https://i.pravatar.cc/100');
+  const [isSaving, setIsSaving] = useState(false);
 
   const handleImageUpload = (e) => {
     const file = e.target.files[0];
     if (file) {
-      const newProfilePic = URL.createObjectURL(file); // Create an object URL for the uploaded image
-      setProfilePic(newProfilePic); // Update profile picture state in settings
-      handleProfilePicChange(newProfilePic); // Pass updated profile picture to the parent
+      const newProfilePic = URL.createObjectURL(file);
+      setProfilePic(newProfilePic);
     }
   };
 
-
   const handleChange = (e) => {
     const { name, value } = e.target;
-    setFormData(prev => ({ ...prev, [name]: value }));
+    setFormData((prev) => ({ ...prev, [name]: value }));
+    setErrors((prev) => ({ ...prev, [name]: '' }));
+  };
+
+  const validate = () => {
+    const newErrors = {};
+    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    const passwordRegex = /^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{8,}$/;
+
+    if (!emailRegex.test(formData.email)) {
+      newErrors.email = 'Please enter a valid email address.';
+    }
+
+    if (!passwordRegex.test(formData.password)) {
+      newErrors.password =
+        'Password must be at least 8 characters and include letters and numbers.';
+    }
+
+    return newErrors;
+  };
+
+  const handleSave = async () => {
+    const validationErrors = validate();
+    if (Object.keys(validationErrors).length > 0) {
+      setErrors(validationErrors);
+      return;
+    }
+
+    setIsSaving(true);
+    await new Promise((resolve) => setTimeout(resolve, 2000));
+    setIsSaving(false);
+    alert('Settings saved!');
   };
 
   return (
@@ -41,36 +72,33 @@ const Settings = () => {
 
       <div className="settings-card">
         <div className="tabs">
-          <button
-            className={`tab ${activeTab === 'profile' ? 'active' : ''}`}
-            onClick={() => setActiveTab('profile')}
-          >
-            Edit Profile
-          </button>
-          <button
-            className={`tab ${activeTab === 'preferences' ? 'active' : ''}`}
-            onClick={() => setActiveTab('preferences')}
-          >
-            Preferences
-          </button>
-          <button
-            className={`tab ${activeTab === 'security' ? 'active' : ''}`}
-            onClick={() => setActiveTab('security')}
-          >
-            Security
-          </button>
+          {['profile', 'preferences', 'security'].map((tab) => (
+            <button
+              key={tab}
+              className={`tab ${activeTab === tab ? 'active' : ''}`}
+              onClick={() => setActiveTab(tab)}
+            >
+              {tab.charAt(0).toUpperCase() + tab.slice(1)}
+            </button>
+          ))}
         </div>
 
         {activeTab === 'profile' && (
           <>
             <div className="form-grid">
-              <div className="profile-picture">
-                <img src="https://i.pravatar.cc/100" alt="Profile" />
-                <label className="edit-icon" title="Edit photo">
-                  ✏️
-                  <input type="file" hidden />
-                </label>
-              </div>
+            <div className="profile-picture">
+  <img src={profilePic} alt="Profile" />
+  <label
+    className="edit-icon"
+    title="Edit photo"
+    aria-label="Edit profile picture"
+    role="button"
+    tabIndex="0"
+  >
+    ✏️
+    <input type="file" hidden onChange={handleImageUpload} />
+  </label>
+</div>
 
               <div className="form-group">
                 <label>Your Name</label>
@@ -84,12 +112,26 @@ const Settings = () => {
 
               <div className="form-group">
                 <label>Email</label>
-                <input name="email" type="email" value={formData.email} onChange={handleChange} />
+                <input
+                  name="email"
+                  type="email"
+                  value={formData.email}
+                  onChange={handleChange}
+                  className={errors.email ? 'invalid' : ''}
+                />
+                {errors.email && <p className="error-text">{errors.email}</p>}
               </div>
 
               <div className="form-group">
                 <label>Password</label>
-                <input name="password" type="password" value={formData.password} onChange={handleChange} />
+                <input
+                  name="password"
+                  type="password"
+                  value={formData.password}
+                  onChange={handleChange}
+                  className={errors.password ? 'invalid' : ''}
+                />
+                {errors.password && <p className="error-text">{errors.password}</p>}
               </div>
 
               <div className="form-group">
@@ -99,12 +141,20 @@ const Settings = () => {
 
               <div className="form-group">
                 <label>Present Address</label>
-                <input name="presentAddress" value={formData.presentAddress} onChange={handleChange} />
+                <input
+                  name="presentAddress"
+                  value={formData.presentAddress}
+                  onChange={handleChange}
+                />
               </div>
 
               <div className="form-group">
                 <label>Permanent Address</label>
-                <input name="permanentAddress" value={formData.permanentAddress} onChange={handleChange} />
+                <input
+                  name="permanentAddress"
+                  value={formData.permanentAddress}
+                  onChange={handleChange}
+                />
               </div>
 
               <div className="form-group">
@@ -124,7 +174,9 @@ const Settings = () => {
             </div>
 
             <div className="form-actions">
-              <button className="save-button">Save</button>
+              <button className="save-button" onClick={handleSave} disabled={isSaving}>
+                {isSaving ? 'Saving...' : 'Save'}
+              </button>
             </div>
           </>
         )}

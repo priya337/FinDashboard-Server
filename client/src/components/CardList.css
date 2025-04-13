@@ -1,33 +1,85 @@
 .cards-wrapper {
   margin-bottom: 2rem;
-  margin-left: 240px; /* Space for sidebar */
+  padding-right: 1rem;
+}
+
+.cards-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 1rem;
 }
 
 .cards-title {
   font-size: 1.5rem;
   font-weight: 600;
-  margin-bottom: 1rem;
-  margin-left: 0.5rem;
   color: #2c2c2c;
+  margin: 0;
 }
 
+.see-all-btn {
+  background: none;
+  border: 1px solid #3f51b5;
+  border-radius: 6px;
+  color: #3f51b5;
+  font-weight: 500;
+  font-size: 1rem;
+  cursor: pointer;
+  padding: 0.3rem 0.75rem;
+  transition: all 0.3s ease;
+}
+
+.see-all-btn:hover {
+  text-decoration: underline;
+  color: #283593;
+}
+
+/* ✅ Scroll wrapper */
+.card-scroll-area {
+  overflow-x: auto;
+  overflow-y: hidden;
+  width: 100%;
+  max-width: 100%;
+  white-space: nowrap;
+  padding-bottom: 0.5rem;
+  scroll-behavior: smooth;
+  border-bottom: 1px solid #eee; /* Optional: helps detect visually */
+}
+
+/* ✅ Always show scrollbar (good for testing on macOS) */
+.card-scroll-area::-webkit-scrollbar {
+  height: 8px;
+  background: #f0f0f0;
+}
+.card-scroll-area::-webkit-scrollbar-thumb {
+  background: #999;
+  border-radius: 4px;
+}
+
+.card-scroll-area::-webkit-scrollbar-thumb {
+  background: #888;
+  border-radius: 4px;
+}
+
+/* ✅ Row layout for cards */
 .card-container {
   display: flex;
-  justify-content: flex-start;
-  flex-wrap: wrap;
   gap: 1.5rem;
+  flex-wrap: nowrap;
+  min-width: max-content;
 }
 
+/* ✅ Card style */
 .card {
-  position: relative;
-  width: 250px;
+  min-width: 250px;
+  max-width: 250px;
+  flex-shrink: 0;
   border-radius: 16px;
-  padding: 1rem;
+  padding: 1.2rem;
   box-shadow: 0 8px 20px rgba(0, 0, 0, 0.08);
+  background: #fff;
   transition: transform 0.3s ease;
-  margin-top: 45px;
-  margin-left: -250px;
-  margin-right: 250px;
+  position: relative;
 }
 
 .card.primary {
@@ -68,4 +120,11 @@
   font-size: 0.95rem;
   font-weight: 500;
   margin: 0.25rem 0;
+}
+
+.card-container {
+  display: flex;
+  flex-wrap: nowrap;
+  gap: 1.5rem;
+  min-width: max-content; /* forces overflow */
 }

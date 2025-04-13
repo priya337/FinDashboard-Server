@@ -73,9 +73,9 @@ const WeeklyChart = () => {
           flex: 1,
           background: '#fff',
           borderRadius: '10px',
-          padding: '85px 40px',
+          padding: '74px 74px',
           boxShadow: '0 10px 20px rgba(0,0,0,0.04)',
-          minWidth: '850px',
+          minWidth: '300px',
         }}
       >
         {chartData ? (

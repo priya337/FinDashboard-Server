@@ -44,7 +44,7 @@ const BalanceChart = () => {
 
   return (
     <div style={{ maxWidth: '550px' }}>
-      <h2 style={{ fontSize: '1.2rem', fontWeight: '600', marginBottom: '1rem', color: '#2c2c3a' }}>
+      <h2 style={{ fontSize: '1.0rem', fontWeight: '600', marginBottom: '1rem', color: '#2c2c3a', marginLeft: '3rem' }}>
         Balance History
       </h2>
       <div
@@ -53,7 +53,8 @@ const BalanceChart = () => {
     borderRadius: '20px',
     padding: '1.5rem 2rem',
     height: '150px',
-    width: '150%',
+    width: '85%',
+    marginLeft: '2.5rem',
     boxShadow: '0 10px 20px rgba(0,0,0,0.04)',
   }}
 >

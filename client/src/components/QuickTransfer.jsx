@@ -5,6 +5,19 @@ import './QuickTransfer.css';
 function QuickTransfer() {
   const [contacts, setContacts] = useState([]);
   const [amount, setAmount] = useState('525.50');
+  const [isSending, setIsSending] = useState(false);
+
+  const handleSend = async () => {
+    setIsSending(true);
+    try {
+      // Simulate sending delay (replace with actual API call if needed)
+      await new Promise(resolve => setTimeout(resolve, 2000));
+    } catch (error) {
+      console.error('Failed to send:', error);
+    } finally {
+      setIsSending(false);
+    }
+  };
 
   useEffect(() => {
     const baseURL = import.meta.env.VITE_API_BASE_URL;
@@ -16,7 +29,7 @@ function QuickTransfer() {
 
   return (
     <div className="quick-transfer-container">
-      <h2 className="section-title">Quick Transfer</h2>
+      <h2 style={{ fontSize: '1.0rem', fontWeight: '600' }}className="section-title">Quick Transfer</h2>
 
       <div className="transfer-card">
         <div className="transfer-users">
@@ -40,9 +53,17 @@ function QuickTransfer() {
             onChange={e => setAmount(e.target.value)}
             className="amount-box"
           />
-          <button className="send-btn">
-            Send <FiSend className="send-icon" />
-          </button>
+    <button
+      className="send-btn"
+      onClick={handleSend}
+      disabled={isSending}
+    >
+      {isSending ? 'Sending...' : (
+        <>
+          Send <FiSend className="send-icon" />
+        </>
+      )}
+    </button>
         </div>
       </div>
     </div>
