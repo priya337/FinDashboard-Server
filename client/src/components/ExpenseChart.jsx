@@ -69,7 +69,7 @@ const ExpenseChart = () => {
         fontWeight: 600,
         color: '#2c2c3a',
         marginBottom: '1rem',
-        marginLeft: '-44rem'
+        marginLeft: '-55rem'
       }}>
         Expense Statistics
       </h2>
@@ -79,13 +79,13 @@ const ExpenseChart = () => {
           background: '#fff',
           borderRadius: '20px',
           boxShadow: '0 10px 20px rgba(0,0,0,0.06)',
-          height: '270px',
-          width: '340px',
+          height: '290px',
+          width: '350px',
           padding: '1.2rem',
           display: 'flex',
           alignItems: 'center',
           justifyContent: 'center',
-          marginLeft: '-44rem'
+          marginLeft: '-55rem'
         }}
       >
         <Pie data={data} options={options} />

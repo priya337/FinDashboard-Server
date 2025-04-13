@@ -25,7 +25,7 @@ const Transactions = () => {
           fontWeight: '600',
           color: '#2c2c3a',
           marginBottom: '1rem',
-          marginLeft: '7.5rem',
+          marginLeft: '8.5rem',
           marginTop: '0.5rem'
         }}
       >
@@ -42,8 +42,8 @@ const Transactions = () => {
           display: 'flex',
           flexDirection: 'column',
           overflow: 'hidden',
-          width: '36%',
-          marginLeft: '7.5rem'
+          width: '35%',
+          marginLeft: '8.5rem'
         }}
       >
         <div

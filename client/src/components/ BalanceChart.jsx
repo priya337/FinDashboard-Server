@@ -52,8 +52,8 @@ const BalanceChart = () => {
     background: '#fff',
     borderRadius: '20px',
     padding: '1.5rem 2rem',
-    height: '150px',
-    width: '85%',
+    height: '200px',
+    width: '95%',
     marginLeft: '2.5rem',
     boxShadow: '0 10px 20px rgba(0,0,0,0.04)',
   }}
