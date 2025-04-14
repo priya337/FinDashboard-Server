@@ -38,9 +38,9 @@ const Dashboard = () => {
 
   return (
     <div className="dashboard-wrapper">
-      <h2 className="settings-title" style={{ position: 'absolute', top: '3%', left: '17%' }}>
+      {/* <h2 className="settings-title" style={{ position: 'absolute', top: '3%', left: '17%' }}>
         Overview
-      </h2>
+      </h2> */}
 
       {/* Header Row for My Cards & Transactions */}
       <div className="dashboard-row header-row">

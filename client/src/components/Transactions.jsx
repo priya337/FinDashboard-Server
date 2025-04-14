@@ -3,6 +3,13 @@ import './Transactions.css';
 
 const Transactions = () => {
   const [transactions, setTransactions] = useState([]);
+  const [isMobile, setIsMobile] = useState(window.innerWidth <= 768);
+
+useEffect(() => {
+  const handleResize = () => setIsMobile(window.innerWidth <= 768);
+  window.addEventListener('resize', handleResize);
+  return () => window.removeEventListener('resize', handleResize);
+}, []);
 
   useEffect(() => {
     fetch('http://localhost:1400/dashboard/transactions')
@@ -20,39 +27,44 @@ const Transactions = () => {
   return (
     <div style={{ marginLeft: '1rem', flex: 1 }}>
       <h2
-        style={{
-          fontSize: '1.0rem',
-          fontWeight: '600',
-          color: '#2c2c3a',
-          marginBottom: '1rem',
-          marginLeft: '8.5rem',
-          marginTop: '0.5rem'
-        }}
+style={{
+  fontSize: '1.0rem',
+  fontWeight: '600',
+  color: '#2c2c3a',
+  marginBottom: '1rem',
+  marginLeft: isMobile ? '0' : '440px',
+  marginTop: '0.5rem',
+  textAlign: isMobile ? 'left' : 'initial',
+}}
       >
         Recent Transactions
       </h2>
 
       <div
-        style={{
-          background: '#fff',
-          borderRadius: '16px',
-          padding: '1.5rem',
-          boxShadow: '0 2px 8px rgba(0, 0, 0, 0.05)',
-          height: '200px', // ⬅️ reduced to force scroll overflow
-          display: 'flex',
-          flexDirection: 'column',
-          overflow: 'hidden',
-          width: '35%',
-          marginLeft: '8.5rem'
-        }}
+style={{
+  background: '#fff',
+  borderRadius: '16px',
+  padding: isMobile ? '1rem' : '1.5rem',
+  boxShadow: '0 2px 8px rgba(0, 0, 0, 0.05)',
+  height: isMobile ? 'auto' : '250px',
+  display: 'flex',
+  flexDirection: 'column',
+  overflow: 'hidden',
+  width: isMobile ? '85%' : '600px',
+  marginLeft: isMobile ? '0' : '430px',
+  boxSizing: 'border-box',
+}}
       >
         <div
           className="dark-scrollbar"
           style={{
             overflowY: 'auto',
-            height: '70%',
+            height: isMobile ? 'auto' : '70%',
+            maxHeight: isMobile ? '200px' : '100%',
             paddingRight: '0.1rem',
+            WebkitOverflowScrolling: 'touch',
           }}
+          
         >
           {transactions.map((tx) => {
             const isPositive = tx.amount >= 0;

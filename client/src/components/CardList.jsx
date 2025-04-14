@@ -1,5 +1,5 @@
 import React, { useEffect, useState, useRef } from 'react';
-import './CardList.css'
+import './CardList.css';
 
 const CardList = () => {
   const [cards, setCards] = useState([]);
@@ -17,7 +17,7 @@ const CardList = () => {
     setShowScroll(prev => !prev);
     setTimeout(() => {
       if (scrollRef.current) {
-        scrollRef.current.scrollTo({ left: 0, behavior: 'smooth' });
+        scrollRef.current.scrollTo({ top: 0, behavior: 'smooth' });
       }
     }, 100);
   };
@@ -29,7 +29,7 @@ const CardList = () => {
       {/* Scrollbar styling */}
       <style>{`
         .scroll-area::-webkit-scrollbar {
-          height: 8px;
+          width: 8px;
         }
         .scroll-area::-webkit-scrollbar-thumb {
           background: #444;
@@ -42,7 +42,6 @@ const CardList = () => {
       `}</style>
 
       <div style={{ marginBottom: '2rem', paddingRight: '1rem' }}>
-        {/* Header row */}
         <div
           style={{
             display: 'flex',
@@ -51,14 +50,7 @@ const CardList = () => {
             marginBottom: '1rem',
           }}
         >
-          <h2
-            style={{
-              fontSize: '1.0rem',
-              fontWeight: 600,
-              color: '#2c2c2c',
-              margin: 0,
-            }}
-          >
+          <h2 style={{ fontSize: '1rem', fontWeight: 600, color: '#2c2c2c', margin: 0 }}>
             My Cards
           </h2>
           {cards.length > 1 && (
@@ -80,32 +72,25 @@ const CardList = () => {
           )}
         </div>
 
-        {/* Scrollable card list */}
+        {/* 📦 Vertical Scrollable Area */}
         <div
-  ref={scrollRef}
-  className="scroll-area"
-  style={{
-    overflowX: showScroll ? 'auto' : 'hidden',
-    overflowY: 'hidden', // ⬅️ if vertical scroll is not needed
-    whiteSpace: 'nowrap',
-    scrollBehavior: 'smooth',
-    paddingBottom: '0.5rem',
-    width: '95%',
-    maxHeight: '200px', // ⬅️ FORCES scroll area limit
-    borderBottom: '1px solid #eee',
-  }}
->
+          ref={scrollRef}
+          className="scroll-area"
+          style={{
+            display: 'flex',
+            flexDirection: 'column',
+            gap: '1.5rem',
+            maxHeight: showScroll ? '350px' : 'none',
+            overflowY: showScroll ? 'auto' : 'hidden',
+            paddingRight: '0.5rem',
+          }}
+        >
           {visibleCards.map((card, index) => (
             <div
               key={card.id}
               style={{
-                display: 'inline-block',
-                verticalAlign: 'top',
-                minWidth: '260px',
-                maxWidth: '260px',
-                marginRight: '1.5rem',
                 borderRadius: '16px',
-                padding: '1.2rem',
+                padding: '55px 35px',
                 boxShadow: '0 8px 20px rgba(0, 0, 0, 0.08)',
                 background:
                   index === 0
@@ -118,62 +103,27 @@ const CardList = () => {
             >
               <div style={{ position: 'absolute', top: '1rem', right: '1rem' }}>
                 <svg width="30" height="20" viewBox="0 0 36 28">
-                  <rect
-                    x="1"
-                    y="1"
-                    width="34"
-                    height="26"
-                    rx="4"
-                    fill={index === 0 ? '#fff' : '#1c1c1c'}
-                  />
+                  <rect x="1" y="1" width="34" height="26" rx="4" fill={index === 0 ? '#fff' : '#1c1c1c'} />
                   <rect x="13" y="1" width="2" height="26" fill="#ccc" />
                   <rect x="21" y="1" width="2" height="26" fill="#ccc" />
                   <circle cx="18" cy="14" r="2" fill="#888" />
                 </svg>
               </div>
 
-              <div
-                style={{
-                  fontSize: '1.8rem',
-                  fontWeight: 700,
-                  marginBottom: '0.75rem',
-                }}
-              >
+              <div style={{ fontSize: '1.8rem', fontWeight: 700, marginBottom: '0.75rem' }}>
                 ${parseFloat(card.balance).toLocaleString()}
               </div>
-              <div
-                style={{
-                  fontSize: '0.95rem',
-                  fontWeight: 500,
-                  marginBottom: '0.25rem',
-                }}
-              >
+              <div style={{ fontSize: '0.95rem', fontWeight: 500, marginBottom: '0.25rem' }}>
                 {card.cardHolder}
               </div>
               <div style={{ fontSize: '0.95rem', fontWeight: 500 }}>
                 **** **** **** {card.cardNumber.slice(-4)}
               </div>
 
-              <div
-                style={{
-                  position: 'absolute',
-                  bottom: '1rem',
-                  right: '1rem',
-                }}
-              >
+              <div style={{ position: 'absolute', bottom: '1rem', right: '1rem' }}>
                 <svg width="36" height="36" viewBox="0 0 48 48">
-                  <circle
-                    cx="20"
-                    cy="24"
-                    r="10"
-                    fill={index === 0 ? '#fff' : '#000'}
-                  />
-                  <circle
-                    cx="28"
-                    cy="24"
-                    r="10"
-                    fill={index === 0 ? '#fff' : '#000'}
-                  />
+                  <circle cx="20" cy="24" r="10" fill={index === 0 ? '#fff' : '#000'} />
+                  <circle cx="28" cy="24" r="10" fill={index === 0 ? '#fff' : '#000'} />
                 </svg>
               </div>
             </div>

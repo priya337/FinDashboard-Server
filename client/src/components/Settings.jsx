@@ -66,9 +66,9 @@ const Settings = () => {
 
   return (
     <div className="settings-page">
-      <h2 className="settings-title" style={{ position: 'absolute', top: '3%', left: '17%' }}>
+      {/* <h2 className="settings-title" style={{ position: 'absolute', top: '3%', left: '17%' }}>
         Settings
-      </h2>
+      </h2> */}
 
       <div className="settings-card">
         <div className="tabs">

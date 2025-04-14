@@ -1,183 +1,301 @@
 /* === DASHBOARD WRAPPER === */
 .dashboard-wrapper {
-    display: flex;
-    flex-direction: column;
-    gap: 2rem;
-    padding: 2rem;
-    margin-left: 250px;
-    background: #f7f9fb;
-    min-height: 100vh;
-    font-family: 'Segoe UI', sans-serif;
-    overflow-x: hidden;
-    transition: margin-left 0.3s ease;
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+  padding: 1rem;
+  margin-left: 250px;
+  background: #f7f9fb;
+  min-height: 100vh;
+  font-family: 'Segoe UI', sans-serif;
+  overflow-x: hidden;
+  transition: margin-left 0.3s ease;
+}
+
+@media (max-width: 1024px) {
+  .dashboard-wrapper {
+    margin-left: 0;
+    padding: 1rem;
   }
-  
-  @media (max-width: 1024px) {
-    .dashboard-wrapper {
-      margin-left: 0;
-      padding: 1.5rem;
-    }
+}
+
+@media (max-width: 576px) {
+  .dashboard-wrapper {
+    padding: 0.75rem;
   }
-  
-  @media (max-width: 576px) {
-    .dashboard-wrapper {
-      padding: 1rem;
-    }
-  }
-  
-  /* === ROW WRAPPERS === */
-  .header-row,
+}
+
+/* === ROW WRAPPERS === */
+.dashboard-row,
+.chart-row,
+.header-row,
+.content-row,
+.charts-row,
+.quick-balance-wrapper {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1.5rem;
+  justify-content: space-between;
+  align-items: flex-start;
+}
+
+@media (max-width: 768px) {
   .dashboard-row,
   .chart-row,
-  .quick-balance-wrapper,
+  .header-row,
   .content-row,
-  .charts-row {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 1.5rem;
-    justify-content: space-between;
-    align-items: flex-start;
+  .charts-row,
+  .quick-balance-wrapper {
+    flex-direction: column;
+    align-items: stretch;
+    gap: 1rem;
   }
-  
-  /* === HEADER === */
-  .header-row {
-    margin-bottom: 1rem;
+}
+
+/* === TITLES === */
+.section-title,
+.chart-title {
+  font-size: 1.25rem;
+  font-weight: 600;
+  color: #2c2c3a;
+  margin-bottom: 1rem;
+}
+
+@media (max-width: 576px) {
+  .section-title,
+  .chart-title {
+    font-size: 1.1rem;
+    margin-bottom: 0.75rem;
   }
-  
-  .section-title {
-    font-size: 1.25rem;
-    font-weight: 600;
-    color: #2c2c3a;
-    margin-bottom: 1rem;
-  }
-  
-  /* === BUTTON === */
-  .see-all-btn {
-    background: none;
-    border: 1px solid #3f51b5;
-    border-radius: 6px;
-    color: #3f51b5;
-    font-weight: 500;
-    cursor: pointer;
-    font-size: 0.95rem;
-    padding: 0.3rem 0.75rem;
-    transition: all 0.3s ease;
-  }
-  
-  .see-all-btn:hover {
-    text-decoration: underline;
-    color: #283593;
-  }
-  
-  /* === CONTENT CONTAINERS === */
+}
+
+/* === CONTAINERS === */
+.cardlist-container,
+.transactions-container,
+.quick-transfer-wrapper,
+.balance-chart-wrapper,
+.chart-section {
+  background: #fff;
+  border-radius: 16px;
+  padding: 1.5rem;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+  width: 100%;
+  box-sizing: border-box;
+  overflow: hidden;
+  margin-bottom: 1rem;
+}
+
+@media (max-width: 768px) {
   .cardlist-container,
   .transactions-container,
   .quick-transfer-wrapper,
   .balance-chart-wrapper,
   .chart-section {
-    flex: 1 1 100%;
-    min-width: 0;
-    background: #fff;
-    border-radius: 16px;
-    padding: 1.5rem;
-    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
-    margin-bottom: 1.5rem;
-    box-sizing: border-box;
-    overflow: hidden;
+    padding: 1rem;
+    min-width: 0 !important;
   }
-  
-  /* === SCROLLABLE CARD LIST === */
-  .card-scroll-area {
-    overflow-x: auto;
-    scroll-behavior: smooth;
-    white-space: nowrap;
-    padding-bottom: 0.5rem;
-    scrollbar-color: #444 #eee;
-    scrollbar-width: thin;
-  }
-  
-  .card-scroll-area::-webkit-scrollbar {
-    height: 8px;
-  }
-  .card-scroll-area::-webkit-scrollbar-thumb {
-    background: #444;
-    border-radius: 4px;
-  }
-  
-  /* === SCROLLABLE TRANSACTIONS BOX === */
+}
+
+/* === SCROLLABLE CARD LIST === */
+.card-scroll-area {
+  overflow-x: auto;
+  white-space: nowrap;
+  scroll-behavior: smooth;
+  padding-bottom: 0.5rem;
+  -webkit-overflow-scrolling: touch;
+  scrollbar-color: #444 #eee;
+  scrollbar-width: thin;
+}
+
+.card-scroll-area::-webkit-scrollbar {
+  height: 8px;
+}
+
+.card-scroll-area::-webkit-scrollbar-thumb {
+  background: #444;
+  border-radius: 4px;
+}
+
+/* === SCROLLABLE TRANSACTIONS BOX === */
+.transactions-box {
+  max-height: 320px;
+  overflow-y: auto;
+  padding-right: 0.5rem;
+  -webkit-overflow-scrolling: touch;
+  scrollbar-color: #444 #eee;
+  scrollbar-width: thin;
+}
+
+.transactions-box::-webkit-scrollbar {
+  width: 6px;
+}
+
+.transactions-box::-webkit-scrollbar-thumb {
+  background: #444;
+  border-radius: 3px;
+}
+
+@media (max-width: 768px) {
   .transactions-box {
-    max-height: 320px;
+    max-height: none;
     overflow-y: auto;
-    padding-right: 0.5rem;
-    scrollbar-color: #444 #eee;
-    scrollbar-width: thin;
   }
-  
-  .transactions-box::-webkit-scrollbar {
-    width: 6px;
+}
+
+/* === SEE ALL BUTTON === */
+.see-all-btn {
+  background: none;
+  border: 1px solid #3f51b5;
+  border-radius: 6px;
+  color: #3f51b5;
+  font-weight: 500;
+  font-size: 0.95rem;
+  padding: 0.3rem 0.75rem;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.see-all-btn:hover {
+  text-decoration: underline;
+  color: #283593;
+}
+
+@media (max-width: 576px) {
+  .see-all-btn {
+    font-size: 0.85rem;
   }
-  .transactions-box::-webkit-scrollbar-thumb {
-    background: #444;
-    border-radius: 3px;
-  }
-  
-  /* === FLEX GRID ON MEDIUM+ DEVICES === */
-  @media (min-width: 768px) {
-    .cardlist-container,
-    .transactions-container,
-    .quick-transfer-wrapper,
-    .balance-chart-wrapper {
-      flex: 1 1 48%;
-      min-width: 320px;
-    }
-  
-    .chart-section {
-      flex: 1 1 48%;
-      min-width: 280px;
-    }
-  }
-  
-  /* === QUICK SECTIONS === */
+}
+
+/* === QUICK SECTIONS HEIGHT === */
+.quick-transfer-wrapper,
+.balance-chart-wrapper {
+  border-radius: 20px;
+  padding: 1.5rem 2rem;
+  height: 360px;
+}
+
+@media (max-width: 768px) {
   .quick-transfer-wrapper,
   .balance-chart-wrapper {
-    border-radius: 20px;
-    padding: 1.5rem 2rem;
-    height: 360px;
+    height: auto;
+    padding: 1rem;
   }
-  
-  /* === CHARTS SECTION === */
+}
+
+/* === CHART ROWS === */
+.charts-row {
+  margin-top: 2rem;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1.5rem;
+  justify-content: space-between;
+}
+
+@media (max-width: 768px) {
   .charts-row {
-    margin-top: 2rem;
+    flex-direction: column;
   }
-  
-  .chart-title {
-    font-size: 1.25rem;
-    font-weight: 600;
-    color: #2c2c3a;
-    margin-bottom: 1rem;
-  }
-  
-  /* === ACTION BUTTONS === */
-  .send-btn:hover {
-    background-color: #6363cb;
-    transform: scale(1.03);
-  }
-  
-  /* === SIDEBAR STYLING (if present) === */
+}
+
+/* === SIDEBAR STYLING === */
+.sidebar {
+  position: fixed;
+  top: 0;
+  left: 0;
+  height: 100vh;
+  width: 250px;
+  background: #fff;
+  box-shadow: 2px 0 8px rgba(0, 0, 0, 0.05);
+  z-index: 1000;
+}
+
+@media (max-width: 1024px) {
   .sidebar {
-    position: fixed;
-    top: 0;
-    left: 0;
-    height: 100vh;
-    width: 250px;
-    background: #fff;
-    box-shadow: 2px 0 8px rgba(0, 0, 0, 0.05);
-    z-index: 1000;
+    display: none;
   }
-  
-  @media (max-width: 1024px) {
-    .sidebar {
-      display: none;
-    }
+
+  .dashboard-wrapper {
+    margin-left: 0;
   }
-  
+}
+
+/* === ULTRA-MOBILE FIXES (≤480px) === */
+@media (max-width: 480px) {
+  .dashboard-wrapper {
+    padding: 0.75rem;
+    margin-left: 0 !important;
+    overflow-x: hidden;
+  }
+
+  .dashboard-row,
+  .chart-row,
+  .content-row,
+  .quick-balance-wrapper,
+  .charts-row {
+    flex-direction: column;
+    gap: 1rem;
+    align-items: stretch;
+  }
+
+  .cardlist-container,
+  .transactions-container,
+  .quick-transfer-wrapper,
+  .balance-chart-wrapper,
+  .chart-section {
+    width: 100% !important;
+    flex: 1 1 100%;
+    padding: 1rem;
+    overflow-x: auto;
+    overflow-y: visible;
+    min-width: 0 !important;
+    box-sizing: border-box;
+  }
+
+  .card-scroll-area {
+    overflow-x: auto !important;
+    white-space: nowrap;
+    -webkit-overflow-scrolling: touch;
+    scroll-behavior: smooth;
+  }
+
+  .transactions-box {
+    max-height: 360px;
+    overflow-y: auto;
+    -webkit-overflow-scrolling: touch;
+    padding-right: 0.5rem;
+  }
+
+  .quick-transfer-wrapper,
+  .balance-chart-wrapper {
+    height: auto !important;
+    padding: 1rem !important;
+  }
+
+  .chart-title,
+  .section-title {
+    font-size: 1.1rem;
+  }
+
+  .see-all-btn {
+    font-size: 0.85rem;
+  }
+
+  .header,
+  .header-left,
+  .header-right {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 0.5rem;
+    width: 100%;
+  }
+
+  .search-input {
+    width: 100% !important;
+    max-width: 100% !important;
+  }
+
+  .profile-pic {
+    width: 32px;
+    height: 32px;
+  }
+}

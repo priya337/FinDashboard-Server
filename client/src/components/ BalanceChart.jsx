@@ -14,6 +14,13 @@ ChartJS.register(LineElement, PointElement, LinearScale, CategoryScale, Tooltip,
 
 const BalanceChart = () => {
   const [chartData, setChartData] = useState(null);
+  const [isMobile, setIsMobile] = useState(window.innerWidth <= 768);
+
+useEffect(() => {
+  const handleResize = () => setIsMobile(window.innerWidth <= 768);
+  window.addEventListener('resize', handleResize);
+  return () => window.removeEventListener('resize', handleResize);
+}, []);
 
   useEffect(() => {
     fetch(`${import.meta.env.VITE_API_BASE_URL}/dashboard/balance-history`)
@@ -48,15 +55,16 @@ const BalanceChart = () => {
         Balance History
       </h2>
       <div
-    style={{
-    background: '#fff',
-    borderRadius: '20px',
-    padding: '1.5rem 2rem',
-    height: '200px',
-    width: '95%',
-    marginLeft: '2.5rem',
-    boxShadow: '0 10px 20px rgba(0,0,0,0.04)',
-  }}
+style={{
+  background: '#fff',
+  borderRadius: '20px',
+  padding: isMobile ? '1rem' : '0.5rem 2rem',
+  height: isMobile ? '240px' : '220px',
+  width: isMobile ? '98%' : '810px',
+  marginLeft: isMobile ? 0 : '1.5rem',
+  boxShadow: '0 10px 20px rgba(0,0,0,0.04)',
+  boxSizing: 'border-box',
+}}
 >
         {chartData ? (
           <Line

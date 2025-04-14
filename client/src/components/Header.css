@@ -27,7 +27,7 @@
 /* ✅ Restrict width on larger screens */
 .search-input {
   width: 240px;
-  max-width: 100%;
+  max-width: 55%;
   padding: 0.5rem;
   border: 1px solid #ddd;
   border-radius: 4px;
@@ -70,3 +70,40 @@
     margin-bottom: 0.5rem;
   }
 }
+
+@media (max-width: 480px) {
+  .header {
+    flex-direction: column;
+    align-items: flex-start;
+    padding: 0.75rem 1rem;
+    width: 100%;
+    box-sizing: border-box;
+  }
+
+  .header-left {
+    flex-direction: row;
+    justify-content: space-between;
+    width: 100%;
+  }
+
+  .page-title {
+    font-size: 1.2rem;
+  }
+
+  .header-right {
+    flex-direction: column;
+    gap: 0.5rem;
+    width: 100%;
+  }
+
+  .search-input {
+    width: 100%;
+    font-size: 0.9rem;
+  }
+
+  .profile-pic {
+    width: 32px;
+    height: 32px;
+  }
+}
+

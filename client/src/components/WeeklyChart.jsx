@@ -13,6 +13,14 @@ ChartJS.register(BarElement, CategoryScale, LinearScale, Tooltip, Legend);
 
 const WeeklyChart = () => {
   const [chartData, setChartData] = useState(null);
+  const [isMobile, setIsMobile] = useState(false);
+
+  useEffect(() => {
+    const checkMobile = () => setIsMobile(window.innerWidth <= 768);
+    checkMobile();
+    window.addEventListener('resize', checkMobile);
+    return () => window.removeEventListener('resize', checkMobile);
+  }, []);
 
   useEffect(() => {
     fetch(`${import.meta.env.VITE_API_BASE_URL}/dashboard/weekly-activity`)
@@ -69,14 +77,16 @@ const WeeklyChart = () => {
       </h2>
 
       <div
-        style={{
-          flex: 1,
-          background: '#fff',
-          borderRadius: '10px',
-          padding: '74px 74px',
-          boxShadow: '0 10px 20px rgba(0,0,0,0.04)',
-          minWidth: '300px',
-        }}
+      style={{
+        background: '#fff',
+        borderRadius: '20px',
+        padding: isMobile ? '1rem' : '0.5rem 2rem',
+        height: isMobile ? '240px' : '300px',
+        width: isMobile ? '85%' : '820px',
+        marginLeft: isMobile ? 0 : '0.5rem',
+        boxShadow: '0 10px 20px rgba(0,0,0,0.04)',
+        boxSizing: 'border-box',
+      }}
       >
         {chartData ? (
           <Bar

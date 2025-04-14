@@ -13,12 +13,11 @@
 }
 
 .settings-card {
-  background: #fff;
-  border-radius: 16px;
-  padding: 2rem;
-  max-width: 1000px;
-  margin: 0 auto;
-  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+  width: 100%;
+  overflow-x: hidden;
+  overflow-y: auto;
+  padding: 1rem;
+  box-sizing: border-box;
 }
 
 .tabs {
@@ -43,9 +42,9 @@
 }
 
 .form-grid {
-  display: grid;
-  grid-template-columns: repeat(2, 1fr);
-  gap: 1.5rem 2rem;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1rem;
 }
 
 .profile-picture {
@@ -73,8 +72,7 @@
 }
 
 .form-group {
-  display: flex;
-  flex-direction: column;
+  flex: 1 1 100%;
 }
 
 .form-group label {
@@ -140,4 +138,5 @@
   flex-direction: column;
   margin-bottom: 1.25rem;
 }
+
 
